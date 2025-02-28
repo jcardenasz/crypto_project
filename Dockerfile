@@ -10,6 +10,10 @@ COPY package*.json ./
 # Install dependencies
 RUN bun install
 
+# Set environment variables
+ENV SECRET='SUPER_SECRET_KEY_HUNGARO_SUEGRO_PALOMO'
+ENV PORT = 14990
+
 # Copy the rest of the application code
 COPY . .
 

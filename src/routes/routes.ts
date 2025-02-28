@@ -5,7 +5,7 @@ import { generateToken, getCode } from "../controllers/otp.controllers/otp.contr
 
 const router = new Router();
 
-router.get("/", (ctx: Context) => { ctx.response.body = "Welcome to the LOS POLLOS HERMANOS Company. Mi name is Gus.";});
+router.get("/", (ctx: Context) => { ctx.response.body = "BACKEND CRIPTO PORTAL SERVICE. STATUS: Running";});
 router.post("/generateToken", generateToken);
 router.get("/getCode", getCode);
 router.post("/auth", authenticate);

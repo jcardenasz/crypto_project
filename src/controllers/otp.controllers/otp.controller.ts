@@ -1,8 +1,9 @@
 import { generateHMAC } from "../../services/hmac.service";
 import { generateOTP } from "../../services/otp.service";
+import cron from "node-cron";
 import type { Context } from "koa";
 
-export const codeOTP = generateOTP();
+export let codeOTP = generateOTP();
 
 interface optProps {
     userMAC: string;
@@ -19,3 +20,8 @@ export function generateToken(ctx: Context): any {
 export function getCode(ctx: Context): any {
     return ctx.response.body  = { OTP: codeOTP };
 }
+
+cron.schedule("*/2 * * * *", () => {
+   codeOTP = generateOTP();
+   console.log("new OTP: ",codeOTP);
+});
