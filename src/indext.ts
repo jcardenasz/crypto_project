@@ -1,6 +1,11 @@
-import { testServices } from "./tests/services.test";
+import Koa from "koa";
+import router from "./routes/routes";
+import { testAuthController } from "./tests/auth.controller.test";
+import dotenv from "dotenv";
+import { Buffer } from "buffer"; // Import Buffer explicitly
 
-const Koa = require('koa');
+dotenv.config();
+
 const app = new Koa();
 
 // logger
@@ -29,7 +34,13 @@ app.use(async (ctx: any) => {
   ctx.body = 'Hello World';
 });
 
-app.listen(3000);
-console.log('Server running on port 3000...');
+// Routes
 
-testServices();
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+// Listening to port
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server running on http://localhost:${process.env.PORT || 3000}`);
+});
